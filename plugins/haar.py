@@ -22,20 +22,21 @@ class Haar(Plugin):
     def get_properties(self):
         #Ler do XML
         return {"0": {"name":"Depth",
-                            "type": HARPIA_INT,
-                            "lower":0,
-                            "step" :1,
-                            "upper":10,
-                            "value":self.depth},
+                      "type": HARPIA_INT,
+                      "lower":0,
+                      "step" :1,
+                      "upper":10,
+                      "value":self.depth
+                      },
                 "1": {"name":"Back Ground",
-                            "type": HARPIA_COLOR,
-                            "value":self.color
-                            },
+                      "type": HARPIA_COLOR,
+                      "value":self.color
+                      },
                 "2": {"name":"Comment",
-                            "type": HARPIA_COMMENT,
-                            "height":150,
-                            "width":500,
-                            "value":self.comment}
+                      "type": HARPIA_COMMENT,
+                      "height":150,
+                      "width":500,
+                      "value":self.comment}
                 }
 
     def getHelp(self):
