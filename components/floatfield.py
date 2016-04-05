@@ -6,10 +6,13 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from components.field import Field
+from constants import *
 
 class FloatField(Field, Gtk.HBox):
 
     def __init__(self, data):
+        if not isinstance(data,dict):
+            return
         Gtk.HBox.__init__(self, True)
         label = Gtk.Label(data["name"])
         self.add(label)
@@ -29,7 +32,7 @@ class FloatField(Field, Gtk.HBox):
         self.show_all()
 
     def get_type(self):
-        return HARPIA_FLT
+        return HARPIA_FLOAT
 
     def get_value(self):
         return self.field.get_value()

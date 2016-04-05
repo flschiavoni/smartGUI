@@ -2,7 +2,7 @@
  # -*- coding: utf-8 -*-
 
 from plugins.plugin import Plugin
-from components.constants import *
+from constants import *
 
 
 class Dilatacao(Plugin):
@@ -12,6 +12,8 @@ class Dilatacao(Plugin):
         self.y = 0
         self.w = 0
         self.h = 0
+        self.file = "/home/"
+        self.file2 = "/tmp"
         pass
         
     def set_properties(self, data):
@@ -20,6 +22,8 @@ class Dilatacao(Plugin):
         self.y = data["1"]
         self.w = data["2"]
         self.h = data["3"]
+        self.file = data["4"]
+        self.file2 = data["5"]
 
         print "Este é o dilatação" + str(data)
 
@@ -48,7 +52,15 @@ class Dilatacao(Plugin):
                             "lower":0,
                             "upper":10,
                             "step" :1,
-                            "value":self.h}
+                            "value":self.h},
+                "4": {"name":"File",
+                            "type": HARPIA_SAVE_FILE,
+                            "title": "Salvar",
+                            "value":self.file},
+                "5": {"name":"Abrir...",
+                            "type": HARPIA_OPEN_FILE,
+                            "title": "Abrir...",
+                            "value":self.file2}
                 }
 
     def getHelp(self):

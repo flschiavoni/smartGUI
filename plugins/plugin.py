@@ -1,5 +1,6 @@
 #!/usr/bin/env python
  # -*- coding: utf-8 -*-
+from constants import *
 
 class Plugin:
   
@@ -13,4 +14,4 @@ class Plugin:
         return {}
 
     def getHelp(self):
-        return ""        
+        return ""

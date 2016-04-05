@@ -3,10 +3,13 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 from components.field import Field
+from constants import *
 
 class CommentField(Field, Gtk.VBox):
 
     def __init__(self, data):
+        if not isinstance(data,dict):
+            return
         Gtk.VBox.__init__(self)
         self.set_homogeneous(False)
         self.set_spacing(10)

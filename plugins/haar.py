@@ -2,7 +2,6 @@
  # -*- coding: utf-8 -*-
 
 from plugins.plugin import Plugin
-from components.constants import *
 
 
 class Haar(Plugin):

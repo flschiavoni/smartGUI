@@ -4,14 +4,19 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 
 from components.field import Field
+from constants import *
 
 class ColorField(Field, Gtk.HBox):
 
     def __init__(self, data):
-        self.color = Gdk.color_parse(data["value"])
-        Gtk.HBox.__init__(self, True)
-        label = Gtk.Label(data["name"])
-        self.add(label)
+        if not isinstance(data,dict):
+            return
+        if "value" in data:
+            self.color = Gdk.color_parse(data["value"])
+            Gtk.HBox.__init__(self, True)
+        if "name" in data:
+            label = Gtk.Label(data["name"])
+            self.add(label)
 
         self.color_block = Gtk.DrawingArea()
         self.color_block.modify_bg(Gtk.StateType.NORMAL, self.color)
@@ -35,7 +40,7 @@ class ColorField(Field, Gtk.HBox):
         color_selection_dialog.destroy()
 
     def get_type(self):
-        return HARPIA_STRING
+        return HARPIA_COLOR
 
     def get_value(self):
         return self.color.to_string()

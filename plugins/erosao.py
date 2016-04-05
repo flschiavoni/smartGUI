@@ -2,8 +2,7 @@
  # -*- coding: utf-8 -*-
 
 from plugins.plugin import Plugin
-from components.constants import *
-
+from constants import *
 
 class Erosao(Plugin):
 
@@ -50,7 +49,7 @@ class Erosao(Plugin):
                             "step" :1,
                             "value":self.ano},
             	"5-preco": {"name":"Preço",
-                            "type": HARPIA_FLT,
+                            "type": HARPIA_FLOAT,
                             "lower":0.0,
                             "upper":100.0,
                             "step" :0.1,

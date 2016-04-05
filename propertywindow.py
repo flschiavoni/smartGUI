@@ -4,27 +4,19 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
+import pkgutil # For dynamic package load
+import inspect # For module inspect
+
 import components
-from components.stringfield import StringField
-from components.intfield import IntField
-from components.commentfield import CommentField
-from components.colorfield import ColorField
-from components.floatfield import FloatField
 
-from components.constants import *
-
-
-component_list = {
-           HARPIA_STRING:  StringField,
-           HARPIA_COMMENT: CommentField,
-           HARPIA_INT:     IntField,
-           HARPIA_COLOR:   ColorField,
-           HARPIA_FLT:     FloatField
-           }
+component_list = {} #Dynamic list to store components
 
 class PropertyWindow(Gtk.Dialog):
 
     def __init__(self, plugin, parent):
+        if not component_list: #load only if it is empty
+            self.__load_components()
+
         self.plugin = plugin
         self.properties = {}
         Gtk.Dialog.__init__(self, "Properties", parent)
@@ -101,3 +93,9 @@ class PropertyWindow(Gtk.Dialog):
         field.set_name(component_key) #Define widget name
         return field
     
+    def __load_components(self):
+        for importer, modname, ispkg in pkgutil.iter_modules(components.__path__):
+            module = __import__("components." + modname, fromlist="dummy")
+            for name, obj in inspect.getmembers(module):
+                if inspect.isclass(obj):
+                    component_list[obj(None).get_type()] = obj
